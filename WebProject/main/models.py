@@ -19,8 +19,8 @@ class Tviteras(models.Model):
     opis = models.CharField(max_length=255)
     lokacija = models.CharField(max_length=50)
     datum_pridruzivanja = models.DateField(auto_now_add=True)
-    pratitelji = models.ManyToManyField('self', related_name='followed_by', symmetrical=False)
-    avatar = models.ImageField(upload_to='uploads/', blank=True, null=True)
+    pratitelji = models.ManyToManyField('self', related_name='pracen_od', symmetrical=False)
+    #avatar = models.ImageField(upload_to='uploads/', blank=True, null=True)
 
     def __str__(self):
         return self.id
