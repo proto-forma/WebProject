@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import *
 
-# Register your models here.
+modeli = [ Tvit, Tviteras, Lajk, Komentar ]
+
+admin.site.register(modeli)
