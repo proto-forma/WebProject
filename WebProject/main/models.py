@@ -13,7 +13,7 @@ class Tvit(models.Model):
         return self.id
 
 class Tviteras(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    korisnik = models.OneToOneField(User, on_delete=models.CASCADE)
     ime = models.CharField(max_length=50)
     hendl = models.CharField(max_length=50)
     opis = models.CharField(max_length=255)
