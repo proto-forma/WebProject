@@ -26,3 +26,6 @@ def register(request):
     context = {'form': form}
 
     return render(request, 'registration/register.html', context)
+
+def profil (request):
+    return render (request,'profil.html')

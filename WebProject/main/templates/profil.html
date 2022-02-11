@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    {% block content %}
+        {% for user in tviteras_list %}
+        <h1> {{ user.korisnik }} </h1><br>
+        <br>
+        <ul>
+            <li> Ime = {{ user.ime }}</li>
+            <li> Hendl = {{ user.hendl }}</li>
+            <li> Lokacija = {{ user.lokacija }}</li>
+            <li> Opis = {{ user.opis }}</li>
+            <li> Datum pridruživanja = {{ user.datum_pridruzivanja }}</li>
+        </ul>
+    {% endblock %}
+</body>
+</html>
