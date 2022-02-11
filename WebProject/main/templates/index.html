@@ -5,12 +5,16 @@
     <title></title>
 </head>
 <body>
-    <h1>Tviter homepage</h1>
+    <h1>Dobro došli na Tviter</h1><br>
+    <img src="tviti.png" alt="Tviti" size="auto" >
+    <button type="button" onclick="location.href='main/templates/registration/login.html'"> Login here </button>
 
-    {% if user.is_authenticated %}
+    <!--{% if user.is_authenticated %}
         <p>Vaše ime: {{ user.username }}</p>   
     {% else %}
         <p>Niste prijavljeni.</p>
-    {% endif %}
+    {% endif %}-->
+
 </body>
 </html>
+
