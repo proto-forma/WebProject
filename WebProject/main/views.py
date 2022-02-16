@@ -4,8 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 
 # Create your views here.
-def index(request):
-    return render(request, 'index.html')
+def glavna_stranica(request):
+    return render(request, 'base.html')
 
 def register(request):
     if request.method == 'POST':

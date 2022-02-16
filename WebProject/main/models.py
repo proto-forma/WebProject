@@ -10,7 +10,7 @@ class Tvit(models.Model):
         ordering = ('-vrijeme_stvaranja',)
 
     def __str__(self):
-        return self.id
+            return "{} ({}): {}".format(self.stvorio.username, self.vrijeme_stvaranja, self.tijelo[:30])
 
 class Tviteras(models.Model):
     korisnik = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -19,11 +19,11 @@ class Tviteras(models.Model):
     opis = models.CharField(max_length=255)
     lokacija = models.CharField(max_length=50)
     datum_pridruzivanja = models.DateField(auto_now_add=True)
-    pratitelji = models.ManyToManyField('self', related_name='pracen_od', symmetrical=False)
+    pratitelji = models.ManyToManyField('self', related_name='pracen_od', symmetrical=False, blank=True)
     #avatar = models.ImageField(upload_to='uploads/', blank=True, null=True)
 
     def __str__(self):
-        return self.id
+        return "{} ({})".format(self.hendl, self.korisnik.username)
 
 class Lajk(models.Model):
     tvit = models.ForeignKey(Tvit, related_name='lajkovi', on_delete=models.CASCADE)

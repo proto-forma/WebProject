@@ -1,8 +1,6 @@
-from django.contrib import admin
-from django.urls import path, include
-from . import views
+from django.urls import path
+from .views import glavna_stranica
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('profile/', views.profile, name='profile')
+    path('', glavna_stranica, name='glavna_stranica'),
 ]
