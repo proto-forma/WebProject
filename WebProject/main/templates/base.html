@@ -15,9 +15,14 @@
     <div class="container">
         <div class="columns">
             {% block content %}
-
+                <button id="loginButton" type="button">Login</button>
             {% endblock content %}
         </div>
     </div>
 </body>
 </html>
+<script type="text/javascript">
+    document.getElementById("loginButton").onclick = function (){
+        location.href = "accounts/login/"; 
+    }
+</script>

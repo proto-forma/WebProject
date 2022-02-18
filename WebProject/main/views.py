@@ -7,6 +7,9 @@ from django.contrib.auth import authenticate, login
 def glavna_stranica(request):
     return render(request, 'base.html')
 
+#def login_str (request):
+    #return render (request, './registration/login.html')
+
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)

@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 class Tvit(models.Model):
     tijelo = models.CharField(max_length=255)
@@ -24,6 +26,8 @@ class Tviteras(models.Model):
 
     def __str__(self):
         return "{} ({})".format(self.hendl, self.korisnik.username)
+
+
 
 class Lajk(models.Model):
     tvit = models.ForeignKey(Tvit, related_name='lajkovi', on_delete=models.CASCADE)
