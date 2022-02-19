@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="column">
+    <div class="block">
+    <h1 class="title is-2">
+        Tvitovi od {{ tviteras.hendl|upper }}
+    </h1>
+    </div>
+</div>
+
+<div class="column is-one-third">
+
+    <div class="block">
+        <h3 class="title is-4">
+            {{tviteras.hendl}} prati:
+        </h3>
+        <div class="content">
+            <ul>
+            {% for prati in tviteras.prati.all %}
+                <li>
+                    <a href="{% url 'main:tviteras' prati.id %}">
+                        {{ prati }}
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="block">
+        <h3 class="title is-4">
+            prate {{tviteras.hendl}}:
+        </h3>
+        <div class="content">
+            <ul>
+            {% for pracen_od in tviteras.pracen_od.all %}
+                <li>
+                    <a href="{% url 'main:tviteras' pracen_od.id %}">
+                        {{ pracen_od }}
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}
