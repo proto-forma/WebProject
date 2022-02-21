@@ -7,6 +7,14 @@
     <h1 class="title is-2">
         Tvitovi od {{ tviteras.hendl|upper }}
     </h1>
+    {% for tvit in tviteras.korisnik.tvitovi.all %}
+        <div class="box">
+            {{ tvit.tijelo }}
+            <span class="is-small has-text-grey-light">
+                ({{ tvit.vrijeme_stvaranja }})
+            </span>
+        </div>
+    {% endfor %}
     </div>
 </div>
 

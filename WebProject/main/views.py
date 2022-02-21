@@ -2,11 +2,14 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
-from .models import Tviteras
+from .models import *
 
 # Create your views here.
 def glavna_stranica(request):
     return render(request, 'base.html')
+def naslovna (request):
+    
+    return render(request, 'main/naslovna.html')
 
 def tviteras(request, pk):
     tviteras = Tviteras.objects.get(pk=pk)

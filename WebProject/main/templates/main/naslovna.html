@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="columns">
+            <button id="profilButton" type="button">Profil</button>
+            <button id="logoutButton" type="button">Logout</button>
+            {% for prati in korisnik.tviteras.prati.all %}
+                {% for tvit in prati.korisnik.tvitovi.all %}
+                    <div class="box">
+                        {{ tvit.tijelo }}
+                        <span class="is-small has-text-grey-light">
+                        ({{ tvit.stvorio }} by {{ tviteras.hendl }}
+                        </span>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+    </div>
+</div>
+{% endblock content %}
+
+<script type="text/javascript">
+    document.getElementById("profilButton").onclick = function (){
+        location.href = "tviteras/"; 
+    }
+    document.getElementById("logoutButton").onclick = function (){
+        location.href = ""; 
+    }
+</script>
