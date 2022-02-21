@@ -21,11 +21,11 @@ class Tviteras(models.Model):
     opis = models.CharField(max_length=255)
     lokacija = models.CharField(max_length=50)
     datum_pridruzivanja = models.DateField(auto_now_add=True)
-    pratitelji = models.ManyToManyField('self', related_name='pracen_od', symmetrical=False, blank=True)
+    prati = models.ManyToManyField('self', related_name='pracen_od', symmetrical=False, blank=True)
     #avatar = models.ImageField(upload_to='uploads/', blank=True, null=True)
 
     def __str__(self):
-        return "{} ({})".format(self.hendl, self.korisnik.username)
+        return "{} ({})".format(self.hendl, self.id, self.korisnik.username)
 
 
 

@@ -2,13 +2,15 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
+from .models import Tviteras
 
 # Create your views here.
 def glavna_stranica(request):
     return render(request, 'base.html')
 
-#def login_str (request):
-    #return render (request, './registration/login.html')
+def tviteras(request, pk):
+    tviteras = Tviteras.objects.get(pk=pk)
+    return render(request, 'main/tviteras.html', {'tviteras': tviteras})
 
 def register(request):
     if request.method == 'POST':
