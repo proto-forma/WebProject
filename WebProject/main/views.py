@@ -10,7 +10,16 @@ def glavna_stranica(request):
 
 def tviteras(request, pk):
     tviteras = Tviteras.objects.get(pk=pk)
-    return render(request, 'main/tviteras.html', {'tviteras': tviteras})
+    if request.method == "POST":
+        trenutni_tviteras = request.user.tviteras
+        data = request.POST
+        action = data.get("follow")
+        if action == "follow":
+            trenutni_tviteras.prati.add(tviteras)
+        elif action == "unfollow":
+            trenutni_tviteras.prati.remove(tviteras)
+        trenutni_tviteras.save()
+    return render(request, "main/tviteras.html", {"tviteras": tviteras})
 
 def register(request):
     if request.method == 'POST':
