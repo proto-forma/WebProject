@@ -6,18 +6,54 @@
     <!-- INFORMACIJE O TVITERASU -->
     <div class="block p-3">
         <div class="box">
-            <p>
-                <span class="title is-4">{{ tviteras.ime }}</span><br>
-                <span class="subtitle is-5">@{{ tviteras.hendl }}</span>
-            </p>
-            <br>
-            <p class="subtitle is-5">
-                {{ tviteras.opis }}
-            </p>
-            <p class="subtitle is-5">
-                Lokacija: {{ tviteras.lokacija }}
-                Datum pridruživanja: {{ tviteras.datum_pridruzivanja }}
-            </p>
+            <div class="columns">
+                <div class="column">
+                    <p>
+                        <span class="title is-4">{{ tviteras.ime }}</span><br>
+                        <span class="subtitle is-5">@{{ tviteras.hendl }}</span>
+                    </p>
+                </div>
+                <div class="column">
+                    <form method="post">
+                        {% csrf_token %}
+                            <div class="buttons is-justify-content-end">
+                            {% if tviteras != user.tviteras %}
+                                {% if tviteras in user.tviteras.prati.all %}
+                                    <button class="button is-static">
+                                        <span class="icon"> <i class="fa-solid fa-user-plus"></i> </span>
+                                        <span>Zaprati</span>
+                                    </button>
+                                    <button class="button is-info" name="pracenje" value="otprati">
+                                        <span class="icon"> <i class="fa-solid fa-user-minus"></i> </span>
+                                        <span>Otprati</span>
+                                    </button>
+                                {% else %}
+                                    <button class="button is-info" name="pracenje" value="zaprati">
+                                        <span class="icon"> <i class="fa-solid fa-user-plus"></i> </span>
+                                        <span>Zaprati</span>
+                                    </button>
+                                    <button class="button is-static">
+                                        <span class="icon"> <i class="fa-solid fa-user-minus"></i> </span>
+                                        <span>Otprati</span>
+                                    </button>
+                                {% endif %}
+                            {% endif %}
+                            </div>
+                    </form>
+                </div>
+            </div>
+            <div class="column">
+                <span class="subtitle is-5">
+                    {{ tviteras.opis }}
+                </span>
+            </div>
+            <div class="column">
+                <span class="subtitle is-5">
+                    <span class="icon"> <i class="fa-solid fa-location-pin"></i> </span>
+                    <span> {{ tviteras.lokacija }} </span>
+                    <span class="ml-5">Datum pridruživanja: {{ tviteras.datum_pridruzivanja }}</span>
+                </span>
+            </div>
         </div>
     </div>
 
@@ -64,36 +100,9 @@
     </div>
 </div>
 
-<div class="column is-one-third">
-
-    <form method="post">
-        {% csrf_token %}
-        <div class="buttons my-3">
-        {% if tviteras != user.tviteras %}
-            {% if tviteras in user.tviteras.prati.all %}
-                <button class="button is-static">
-                    <span class="icon"> <i class="fa-solid fa-user-plus"></i> </span>
-                    <span>Zaprati</span>
-                </button>
-                <button class="button is-info" name="pracenje" value="otprati">
-                    <span class="icon"> <i class="fa-solid fa-user-minus"></i> </span>
-                    <span>Otprati</span>
-                </button>
-            {% else %}
-                <button class="button is-info" name="pracenje" value="zaprati">
-                    <span class="icon"> <i class="fa-solid fa-user-plus"></i> </span>
-                    <span>Zaprati</span>
-                </button>
-                <button class="button is-static">
-                    <span class="icon"> <i class="fa-solid fa-user-minus"></i> </span>
-                    <span>Otprati</span>
-                </button>
-            {% endif %}
-        {% endif %}
-        </div>
-    </form>
-
-    <div class="block">
+<div class="column is-one-quarter">
+    <!-- POPIS PRAĆENIKA -->
+    <div class="block mt-6">
         <h3 class="title is-4">
             {{tviteras.hendl}} prati:
         </h3>
@@ -117,6 +126,7 @@
         </div>
     </div>
 
+    <!-- POPIS PRATITELJA -->
     <div class="block mt-6">
         <h3 class="title is-4">
             prate {{tviteras.hendl}}:

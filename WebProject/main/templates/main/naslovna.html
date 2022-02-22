@@ -2,6 +2,7 @@
 {% block content %}
 
 <div class="column">
+    <!-- UNOS NOVOG TVITA -->
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
@@ -10,18 +11,76 @@
         </button>
     </form>
 
-    <!--<button id="profilButton" type="button">Profil</button>
-    <button id="logoutButton" type="button">Logout</button>-->
-    {% for praceni_tviteras in user.tviteras.prati.all %}
-        {% for tvit in praceni_tviteras.korisnik.tvitovi.all %}
-            <div class="box">
-                {{ tvit.tijelo }}
-                <span class="is-small has-text-grey-light">
-                    ({{ tvit.vrijeme_stvaranja }} by {{ a.hendl }})
-                </span>
-            </div>
+    <!-- ISPIS SVIH TVITOVA -->
+    <div class="block mx-3">
+        {% for praceni_tviteras in user.tviteras.prati.all %}
+            {% for tvit in praceni_tviteras.korisnik.tvitovi.all %}
+                <div class="box p-3">
+                    <article class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <p>
+                                    <span class="is-size-5 has-text-bold">
+                                        {{ tvit.stvorio.tviteras.ime }}
+                                    </span>
+                                    <span class=" is-size-6 has-text-grey-light">
+                                        @{{ tvit.stvorio.tviteras.hendl }} {{ tvit.vrijeme_stvaranja|timesince }}
+                                    </span>
+                                </p>
+                                <p>
+                                    {{ tvit.tijelo }}
+                                </p>
+                            </div>
+                            
+                            <nav class="level is-mobile">
+                                <div class="level-left">
+                                    <a href="{% url 'main:tvit' tvit.id %}">
+                                        <div class="buttons">
+                                            <button class="button is-disabled is-small is-light">
+                                                <span class="icon"> <i class="fa-solid fa-heart"></i> </span>
+                                                <span> {{ tvit.lajkovi.count }} </span>
+                                            </button>
+                                            <button class="button is-disabled is-small is-light">
+                                                <span class="icon"> <i class="fa-solid fa-comments"></i> </span>
+                                                <span> {{ tvit.komentari.count }} </span>
+                                            </button>
+                                        </div>
+                                    </a>
+                                </div>
+                            </nav>  
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
         {% endfor %}
-    {% endfor %}
+    </div>
+</div>
+
+<!-- ISPIS SVIH TVITERAŠA -->
+<div class="column is-one-quarter">
+    <div class="block">
+        <h3 class="title is-4">
+            {{tviteras.hendl}} prati:
+        </h3>
+        <div class="content">
+            {% for prati in tviteras.prati.all %}
+                <div class="block">
+                    <div class="box p-2">
+                        <a href="{% url 'main:tviteras' prati.id %}">
+                            <div class="media">
+                                <div class="media-content">
+                                    <p>
+                                        <span class="title is-5"> {{ prati.ime }} </span> <br>
+                                        <span class="subtitle is-6"> @{{ prati.hendl }} </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 
 
