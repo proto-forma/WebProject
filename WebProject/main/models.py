@@ -47,6 +47,6 @@ class Komentar(models.Model):
         ordering = ('-vrijeme_komentiranja',)
 
     def __str__(self):
-        return self.id
+        return "{} (tvit {}) {}".format(self.stvorio.username, self.tvit.id, self.tijelo)
 
 

@@ -12,8 +12,8 @@
 
     <!--<button id="profilButton" type="button">Profil</button>
     <button id="logoutButton" type="button">Logout</button>-->
-    {% for a in user.tviteras.prati.all %}
-        {% for tvit in a.korisnik.tvitovi.all %}
+    {% for praceni_tviteras in user.tviteras.prati.all %}
+        {% for tvit in praceni_tviteras.korisnik.tvitovi.all %}
             <div class="box">
                 {{ tvit.tijelo }}
                 <span class="is-small has-text-grey-light">

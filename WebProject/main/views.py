@@ -26,13 +26,18 @@ def tviteras(request, pk):
         podaci = request.POST
         radnja_pracenje = podaci.get("pracenje")
 
-        if radnja_pracenje == "pocni-pratiti":
+        if radnja_pracenje == "zaprati":
             logirani_tviteras.prati.add(tviteras)
-        elif radnja_pracenje == "prestani-pratiti":
+        elif radnja_pracenje == "otprati":
             logirani_tviteras.prati.remove(tviteras)
 
         logirani_tviteras.save()
     return render(request, "main/tviteras.html", {"tviteras": tviteras})
+
+def tvit(request, pk):
+    tvit = Tvit.objects.get(pk=pk)
+    return render(request, "main/tvit.html", {"tvit": tvit})
+
 
 def register(request):
     if request.method == 'POST':
