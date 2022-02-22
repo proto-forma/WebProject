@@ -8,11 +8,14 @@
         Tvitovi od {{ tviteras.hendl|upper }}
     </h1>
     {% for tvit in tviteras.korisnik.tvitovi.all %}
-        <div class="box">
-            {{ tvit.tijelo }}
-            <span class="is-small has-text-grey-light">
-                ({{ tvit.vrijeme_stvaranja }})
+        <div class="box p-3 m-3">
+            <strong>{{ tvit.stvorio.tviteras.ime }}</strong>
+            <span class="has-text-grey-light">
+                @{{ tvit.stvorio.tviteras.hendl }}
+                {{ tvit.vrijeme_stvaranja|timesince }}
             </span>
+            <br>
+            {{ tvit.tijelo }}
         </div>
     {% endfor %}
     </div>
@@ -57,16 +60,21 @@
     <form method="post">
         {% csrf_token %}
         <div class="buttons has-addons">
-        {% if tviteras in user.tviteras.prati.all %}
-            <button class="button is-success is-static">Follow</button>
-            <button class="button is-danger" name="follow" value="unfollow">
-                Unfollow
-            </button>
+        {% if tviteras == user.tviteras %}
+            <button class="button is-success is-static">Počni pratiti</button>
+            <button class="button is-danger is-static">Prestani pratiti</button>
         {% else %}
-            <button class="button is-success" name="follow" value="follow">
-                Follow
-            </button>
-            <button class="button is-danger is-static">Unfollow</button>
+            {% if tviteras in user.tviteras.prati.all %}
+                <button class="button is-success is-static">Počni pratiti</button>
+                <button class="button is-danger" name="pracenje" value="prestani-pratiti">
+                    Prestani pratiti
+                </button>
+            {% else %}
+                <button class="button is-success" name="pracenje" value="pocni-pratiti">
+                    Počni pratiti
+                </button>
+                <button class="button is-danger is-static">Prestani pratiti</button>
+            {% endif %}
         {% endif %}
         </div>
     </form>

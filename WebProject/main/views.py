@@ -7,20 +7,21 @@ from .models import *
 # Create your views here.
 def glavna_stranica(request):
     return render(request, 'base.html')
+
 def naslovna (request):
-    
     return render(request, 'main/naslovna.html')
 
 def tviteras(request, pk):
     tviteras = Tviteras.objects.get(pk=pk)
     if request.method == "POST":
         trenutni_tviteras = request.user.tviteras
-        data = request.POST
-        action = data.get("follow")
-        if action == "follow":
-            trenutni_tviteras.prati.add(tviteras)
-        elif action == "unfollow":
-            trenutni_tviteras.prati.remove(tviteras)
+        podaci = request.POST
+        radnja = podaci.get("pracenje")
+        if tviteras != trenutni_tviteras:
+            if radnja == "pocni-pratiti":
+                trenutni_tviteras.prati.add(tviteras)
+            elif radnja == "prestani-pratiti":
+                trenutni_tviteras.prati.remove(tviteras)
         trenutni_tviteras.save()
     return render(request, "main/tviteras.html", {"tviteras": tviteras})
 
