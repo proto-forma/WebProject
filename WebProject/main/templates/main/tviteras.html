@@ -6,13 +6,17 @@
     <!-- INFORMACIJE O TVITERASU -->
     <div class="block p-3">
         <div class="box">
+
             <div class="columns">
+                <!-- IME I HENDL -->
                 <div class="column">
                     <p>
                         <span class="title is-4">{{ tviteras.ime }}</span><br>
                         <span class="subtitle is-5">@{{ tviteras.hendl }}</span>
                     </p>
                 </div>
+
+                <!-- GUMBI ZA PRAĆENJE -->
                 <div class="column">
                     <form method="post">
                         {% csrf_token %}
@@ -42,42 +46,50 @@
                     </form>
                 </div>
             </div>
-            <div class="column">
-                <span class="subtitle is-5">
-                    {{ tviteras.opis }}
-                </span>
+
+            <!-- OPIS TVITERASA -->
+            <div class="columns">
+                <div class="column">
+                    <span class="subtitle is-5">
+                        {{ tviteras.opis }}
+                    </span>
+                </div>
             </div>
-            <div class="column">
-                <span class="subtitle is-5">
-                    <span class="icon"> <i class="fa-solid fa-location-pin"></i> </span>
-                    <span> {{ tviteras.lokacija }} </span>
-                    <span class="ml-5">Datum pridruživanja: {{ tviteras.datum_pridruzivanja }}</span>
-                </span>
+
+            <!-- LOKACIJA I DATUM PRIDRUŽIVANJA -->
+            <div class="columns">
+                <div class="column">
+                    <span class="subtitle is-5">
+                        <span class="icon"> <i class="fa-solid fa-location-pin"></i> </span>
+                        <span> {{ tviteras.lokacija }} </span>
+
+                        <span class="icon ml-5"> <i class="fa-solid fa-calendar-days"></i> </span>
+                        <span> {{ tviteras.datum_pridruzivanja }} </span>
+                    </span>
+                </div>
             </div>
+
         </div>
     </div>
 
-    <!-- BLOK ZA TVITOVE -->
-    <div class="block mt-6 mx-3">
+    <!-- BLOK ZA LISTU TVITOVA -->
+    <div class="block mt-3 mx-3">
         {% for tvit in tviteras.korisnik.tvitovi.all %}
-            <div class="box p-3">
+            <div class="box my-2 p-3">
                 <article class="media">
                     <div class="media-content">
                         <div class="content">
                             <p>
-                                <span class="is-size-5 has-text-bold">
-                                    {{ tvit.stvorio.tviteras.ime }}
-                                </span>
-                                <span class=" is-size-6 has-text-grey-light">
-                                    @{{ tvit.stvorio.tviteras.hendl }} {{ tvit.vrijeme_stvaranja|timesince }}
-                                </span>
+                                <span class="is-size-5 has-text-bold"> {{ tvit.stvorio.tviteras.ime }} </span>
+                                <span class="is-size-6 has-text-grey-light"> @{{ tvit.stvorio.tviteras.hendl }} </span>
+                                <span class="is-size-6 has-text-grey-light ml-5"> {{ tvit.vrijeme_stvaranja|timesince }} </span>
                             </p>
                             <p>
                                 {{ tvit.tijelo }}
                             </p>
                         </div>
                         
-                        <nav class="level is-mobile">
+                        <nav class="level is-mobile mt-5">
                             <div class="level-left">
                                 <a href="{% url 'main:tvit' tvit.id %}">
                                     <div class="buttons">
@@ -101,15 +113,15 @@
 </div>
 
 <div class="column is-one-quarter">
-    <!-- POPIS PRAĆENIKA -->
+    <!-- POPIS TVITERASA KOJE KORISNIK PRATI -->
     <div class="block mt-6">
-        <h3 class="title is-4">
-            {{tviteras.hendl}} prati:
+        <h3 class="title is-4 mb-4">
+            {{ tviteras.prati.count }} pratim:
         </h3>
         <div class="content">
             {% for prati in tviteras.prati.all %}
-                <div class="block">
-                    <div class="box p-2">
+                <div class="block my-2">
+                    <div class="box p-3">
                         <a href="{% url 'main:tviteras' prati.id %}">
                             <div class="media">
                                 <div class="media-content">
@@ -126,14 +138,14 @@
         </div>
     </div>
 
-    <!-- POPIS PRATITELJA -->
+    <!-- POPIS TVITERASA KOJE PRATE KORISNIKA -->
     <div class="block mt-6">
-        <h3 class="title is-4">
-            prate {{tviteras.hendl}}:
+        <h3 class="title is-4 mb-4">
+            {{ tviteras.pracen_od.count }} osobe koje prate:
         </h3>
         <div class="content">
             {% for pracen_od in tviteras.pracen_od.all %}
-                <div class="block">
+                <div class="block my-2">
                     <div class="card">
                         <a href="{% url 'main:tviteras' pracen_od.id %}">
                             <div class="card-content p-2">
