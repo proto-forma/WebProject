@@ -3,12 +3,20 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from .models import *
+from .form import *
 
 # Create your views here.
 def glavna_stranica(request):
     return render(request, 'base.html')
 
 def naslovna (request):
+    #if request.method == "POST":
+        #form = TvitForm(request.POST or None)
+        #if form.is_valid():
+            #Tvit = form.save(commit=False)
+            #Tvit.user = request.user
+            #Tvit.save()
+            #return redirect("tviter:naslovna_stranica")
     return render(request, 'main/naslovna.html')
 
 def tviteras(request, pk):

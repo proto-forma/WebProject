@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import *
 
-app_name = 'main'
+app_name = 'tviter'
 
 urlpatterns = [
     path('', glavna_stranica, name='glavna_stranica'),

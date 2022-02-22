@@ -1,26 +1,38 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <div class="column">
-        <button id="profilButton" type="button">Profil</button>
-        <button id="logoutButton" type="button">Logout</button>
-        {% for a in user.tviteras.prati.all %}
-            {% for tvit in a.korisnik.tvitovi.all %}
-                <div class="box">
-                    {{ tvit.tijelo }}
-                     <span class="is-small has-text-grey-light">
-                        ({{ tvit.vrijeme_stvaranja }} by {{ a.hendl }})
-                    </span>
-                </div>
-            {% endfor %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button is-success is-fullwidth is-medium mt-5"
+                type="submit">Tvit
+        </button>
+    </form>
+
+    <!--<button id="profilButton" type="button">Profil</button>
+    <button id="logoutButton" type="button">Logout</button>-->
+    {% for a in user.tviteras.prati.all %}
+        {% for tvit in a.korisnik.tvitovi.all %}
+            <div class="box">
+                {{ tvit.tijelo }}
+                <span class="is-small has-text-grey-light">
+                    ({{ tvit.vrijeme_stvaranja }} by {{ a.hendl }})
+                </span>
+            </div>
         {% endfor %}
+    {% endfor %}
 </div>
+
+
+
 {% endblock content %}
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
     document.getElementById("profilButton").onclick = function (){
         location.href = "tviteras/"; 
     }
     document.getElementById("logoutButton").onclick = function (){
         location.href = ""; 
     }
-</script>
+</script>-->
