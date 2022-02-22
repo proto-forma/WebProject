@@ -4,24 +4,78 @@
 
 <div class="column">
     <div class="block">
-    <h1 class="title is-2">
-        Tvitovi od {{ tviteras.hendl|upper }}
-    </h1>
-    {% for tvit in tviteras.korisnik.tvitovi.all %}
-        <div class="box p-3 m-3">
-            <strong>{{ tvit.stvorio.tviteras.ime }}</strong>
-            <span class="has-text-grey-light">
-                @{{ tvit.stvorio.tviteras.hendl }}
-                {{ tvit.vrijeme_stvaranja|timesince }}
-            </span>
-            <br>
-            {{ tvit.tijelo }}
-        </div>
-    {% endfor %}
+        <h1 class="title is-2">
+            Informacije:
+        </h1>
+            <div class="box p-3 m-3">
+                <p>Ime: {{ tviteras.ime }}</p><br>
+                <p>Hendl: {{ tviteras.hendl }}</p><br>
+                <p>Lokacija: {{ tviteras.lokacija }}</p><br>
+                <p>Opis: {{ tviteras.opis }}</p><br>
+                <p>Datum pridruzivanja: {{ tviteras.datum_pridruzivanja }}</p><br>
+            </div>
+    </div>
+    <div class="block">
+        <h1 class="title is-2">
+            Tvitovi od {{ tviteras.hendl|upper }}
+        </h1>
+        {% for tvit in tviteras.korisnik.tvitovi.all %}
+            <div class="box p-3 m-3">
+                <article class="media">
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <strong>{{ tvit.stvorio.tviteras.ime }}</strong>
+                                <span class="has-text-grey-light">
+                                    @{{ tvit.stvorio.tviteras.hendl }}
+                                    {{ tvit.vrijeme_stvaranja|timesince }}
+                                </span>
+                                <br>
+                                {{ tvit.tijelo }}
+                            </p>
+                        </div>
+                        <nav class="level is-mobile">
+                            <div class="level-left">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <div class="buttons mr-3">
+                                        <button class="button is-small is-info" name="lajkanje" value="dislajkaj">
+                                            {{ tvit.lajkovi.count }} lajka
+                                        </button>
+                                        <button class="button is-small is-info" name="lajkanje" value="lajkaj">
+                                            {{ tvit.komentari.count }} komentara
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </nav>
+                    </div>
+                </article>
+            </div>
+        {% endfor %}
     </div>
 </div>
 
 <div class="column is-one-third">
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="buttons m-3">
+        {% if tviteras != user.tviteras %}
+            {% if tviteras in user.tviteras.prati.all %}
+                <button class="button is-static">Počni pratiti</button>
+                <button class="button is-info" name="pracenje" value="prestani-pratiti">
+                    Prestani pratiti
+                </button>
+            {% else %}
+                <button class="button is-info" name="pracenje" value="pocni-pratiti">
+                    Počni pratiti
+                </button>
+                <button class="button is-static">Prestani pratiti</button>
+            {% endif %}
+        {% endif %}
+        </div>
+    </form>
 
     <div class="block">
         <h3 class="title is-4">
@@ -56,28 +110,6 @@
             </ul>
         </div>
     </div>
-
-    <form method="post">
-        {% csrf_token %}
-        <div class="buttons has-addons">
-        {% if tviteras == user.tviteras %}
-            <button class="button is-success is-static">Počni pratiti</button>
-            <button class="button is-danger is-static">Prestani pratiti</button>
-        {% else %}
-            {% if tviteras in user.tviteras.prati.all %}
-                <button class="button is-success is-static">Počni pratiti</button>
-                <button class="button is-danger" name="pracenje" value="prestani-pratiti">
-                    Prestani pratiti
-                </button>
-            {% else %}
-                <button class="button is-success" name="pracenje" value="pocni-pratiti">
-                    Počni pratiti
-                </button>
-                <button class="button is-danger is-static">Prestani pratiti</button>
-            {% endif %}
-        {% endif %}
-        </div>
-    </form>
 
 </div>
 
