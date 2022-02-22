@@ -2,8 +2,9 @@
 
 {% block content %}
 
+<!-- STUPAC ZA INFORMACIJE O TVITERASU I POPIS NJEGOVIH TVITOVA -->
 <div class="column">
-    <!-- INFORMACIJE O TVITERASU -->
+    <!-- BLOK INFORMACIJA O TVITERASU -->
     <div class="block p-3">
         <div class="box">
 
@@ -112,8 +113,9 @@
     </div>
 </div>
 
+<!-- STUPAC ZA POPIS PRATITELJA-->
 <div class="column is-one-quarter">
-    <!-- POPIS TVITERASA KOJE KORISNIK PRATI -->
+    <!-- BLOK ZA POPIS TVITERASA KOJE KORISNIK PRATI -->
     <div class="block mt-6">
         <h3 class="title is-4 mb-4">
             {{ tviteras.prati.count }} pratim:
@@ -138,7 +140,7 @@
         </div>
     </div>
 
-    <!-- POPIS TVITERASA KOJE PRATE KORISNIKA -->
+    <!-- BLOK ZA POPIS TVITERASA KOJE PRATE KORISNIKA -->
     <div class="block mt-6">
         <h3 class="title is-4 mb-4">
             {{ tviteras.pracen_od.count }} osobe koje prate:
