@@ -38,7 +38,7 @@ class TviterasForm(forms.ModelForm):
     ime = forms.CharField(
         widget=forms.widgets.Textarea(
             attrs={
-                "placeholder": "Ništa sporo, brate, samo gas daj...",
+                "placeholder": "Grše",
                 "class": "input is-grey-light is-medium",
             }
         ),
@@ -48,7 +48,7 @@ class TviterasForm(forms.ModelForm):
     hendl = forms.CharField(
         widget=forms.widgets.Textarea(
             attrs={
-                "placeholder": "Ništa sporo, brate, samo gas daj...",
+                "placeholder": "grše69",
                 "class": "input is-grey-light is-medium",
             }
         ),
@@ -58,7 +58,7 @@ class TviterasForm(forms.ModelForm):
     opis = forms.CharField(
         widget=forms.widgets.Textarea(
             attrs={
-                "placeholder": "Ništa sporo, brate, samo gas daj...",
+                "placeholder": "Palme, high sky, more, night ride...",
                 "class": "input is-grey-light is-medium",
             }
         ),
@@ -68,7 +68,7 @@ class TviterasForm(forms.ModelForm):
     lokacija = forms.CharField(
         widget=forms.widgets.Textarea(
             attrs={
-                "placeholder": "Ništa sporo, brate, samo gas daj...",
+                "placeholder": "Split",
                 "class": "input is-grey-light is-medium",
             }
         ),
