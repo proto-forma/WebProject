@@ -8,4 +8,6 @@ urlpatterns = [
     path('naslovna/', naslovna, name='naslovna_stranica'),
     path('tviteras/<int:pk>', tviteras, name='tviteras'),
     path('tvit/<int:pk>', tvit, name='tvit'),
+    path('register/', register, name='register'),
+    path('novi_tviteras/', novi_tviteras, name='novi_tviteras'),
 ]

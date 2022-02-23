@@ -117,6 +117,26 @@
 <div class="column is-one-quarter">
     <!-- BLOK ZA POPIS TVITERASA KOJE KORISNIK PRATI -->
     <div class="block mt-6">
+        <div class="content">
+            <div class="buttons is-justify-content-center is-flex-direction-column">
+                {% if tviteras == user.tviteras %}
+                    <a href="{% url 'main:tviteras' user.tviteras.id %}">
+                        <button class="button is-info is-medium">
+                            <span class="icon"> <i class="fa-solid fa-address-card"></i> </span>
+                            <span> Moj profil </span>
+                        </button>
+                    </a>
+                {% endif %}
+                <a href='/accounts/logout'>
+                    <button class="button is-info is-medium">
+                        <span class="icon"> <i class="fa-solid fa-address-card"></i> </span>
+                        <span> Logout </span>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="block mt-6">
         <h3 class="title is-4 mb-4">
             {{ tviteras.prati.count }} pratim:
         </h3>
@@ -148,18 +168,17 @@
         <div class="content">
             {% for pracen_od in tviteras.pracen_od.all %}
                 <div class="block my-2">
-                    <div class="card">
+                    <div class="box p-3">
                         <a href="{% url 'main:tviteras' pracen_od.id %}">
-                            <div class="card-content p-2">
-                                <div class="media">
-                                    <div class="media-content">
-                                        <p>
-                                            <span class="title is-5"> {{ pracen_od.ime }} </span> <br>
-                                            <span class="subtitle is-6"> @{{ pracen_od.hendl }} </span>
-                                        </p>
-                                    </div>
+                            <div class="media">
+                                <div class="media-content">
+                                    <p>
+                                        <span class="title is-5"> {{ pracen_od.ime }} </span> <br>
+                                        <span class="subtitle is-6"> @{{ pracen_od.hendl }} </span>
+                                    </p>
                                 </div>
                             </div>
+
                         </a>
                     </div>
                 </div>

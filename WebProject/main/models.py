@@ -52,3 +52,12 @@ class Tvit(models.Model):
             return "{} ({}): {}".format(self.stvorio.username, self.vrijeme_stvaranja, self.tijelo[:30])
 
 
+@receiver(post_save, sender=User)
+def create_tviteras(sender, instance, created, **kwargs):
+    if created:
+        user_tviteras = Tviteras(korisnik=instance)
+        user_tviteras.save()
+        user_tviteras.prati.add(instance.tviteras)
+        user_tviteras.save()
+
+

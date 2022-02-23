@@ -10,22 +10,47 @@
     <section class="hero is-small is-info mb-4">
         <a href="/naslovna/">
             <div class="hero-body has-text-centered">
-                <h1 class="title is-1">Tviter</h1>
-                <p class="subtitle is-4">Društvena mreža za elitu.</p>
+                <h1 class="title is-1">
+                    <span class="icon"> <i class="fa-solid fa-dove"></i> </span>
+                    <span class="ml-4">Tviter</span>
+                </h1>
+                <p class="subtitle is-4">Društvena mreža za GASERE.</p>
             </div>
         </a>
     </section>
     <div class="container">
         <div class="columns">
             {% block content %}
-                <button id="loginButton" type="button">Login</button>
+                <div class="column">
+                    <div class="block mt-6">
+                        <div class="content">
+                            <div class="buttons is-justify-content-center">
+                                <a href='/accounts/login'>
+                                    <button class="button is-info is-medium">
+                                        <span class="icon"> <i class="fa-solid fa-address-card"></i> </span>
+                                        <span> Login </span>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="block mt-6">
+                        <div class="content">
+                            <div class="buttons is-justify-content-center">
+                                <a href="{% url 'main:register' %}">
+                                    <button class="button is-info is-medium">
+                                        <span class="icon"> <i class="fa-solid fa-address-card"></i> </span>
+                                        <span> Registracija </span>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             {% endblock content %}
         </div>
     </div>
 </body>
 </html>
-<script type="text/javascript">
-    document.getElementById("loginButton").onclick = function (){
-        location.href = "accounts/login/"; 
-    }
-</script>

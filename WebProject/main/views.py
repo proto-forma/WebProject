@@ -4,28 +4,34 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from .models import *
 from .form import *
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def glavna_stranica(request):
     return render(request, 'base.html')
 
+
+@login_required
 def naslovna(request):
-    form = TvitForm()
     tviterasi = Tviteras.objects.exclude(korisnik=request.user)
-    #if request.method == "POST":
-        #form = TvitForm(request.POST or None)
-        #if form.is_valid():
-            #Tvit = form.save(commit=False)
-            #Tvit.user = request.user
-            #Tvit.save()
-            #return redirect("tviter:naslovna_stranica")
+    trenutni_path = request.path
+    form = TvitForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            Tvit = form.save(commit=False)
+            Tvit.stvorio = request.user
+            Tvit.save()
+            return redirect(trenutni_path)
     return render(request, 'main/naslovna.html', {'tviterasi': tviterasi, 'form': form})
 
 
+@login_required
 def tviteras_list(request):
     tviterasi = Tviteras.objects.exclude(user=request.user)
     return render(request, 'main/tviteras_list.html', {'tviterasi': tviterasi})
 
+
+@login_required
 def tviteras(request, pk):
     tviteras = Tviteras.objects.get(pk=pk)
     if request.method == "POST":
@@ -41,11 +47,13 @@ def tviteras(request, pk):
         logirani_tviteras.save()
     return render(request, "main/tviteras.html", {"tviteras": tviteras})
 
+
+@login_required
 def tvit(request, pk):
     tvit = Tvit.objects.get(pk=pk)
     trenutni_path = request.path
     form = KomentarForm(request.POST or None)
-    
+
     if request.method == "POST":
         
         if form.is_valid():
@@ -81,11 +89,24 @@ def register(request):
 
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('main:naslovna_stranica')
-
+            return redirect('main:novi_tviteras')
     else:
         form = UserCreationForm()
 
     context = {'form': form}
 
-    return render(request, 'registration/register.html', context)
+    return render(request, "registration/register.html", context)
+
+@login_required
+def novi_tviteras(request):
+    tviteras = request.user.tviteras
+    form = TviterasForm(request.POST or None, instance=tviteras)
+
+    if request.method == "POST":
+        if form.is_valid():
+            novi_tviteras = form.save(commit=False)
+            novi_tviteras.save()
+
+            return redirect('main:naslovna_stranica')
+
+    return render(request, "main/novi_tviteras.html", {"form": form})
