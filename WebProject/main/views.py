@@ -20,6 +20,11 @@ def naslovna (request):
             #return redirect("tviter:naslovna_stranica")
     return render(request, 'main/naslovna.html', {'tviterasi': tviterasi})
 
+
+def tviteras_list(request):
+    tviterasi = Tviteras.objects.exclude(user=request.user)
+    return render(request, 'main/tviteras_list.html', {'tviterasi': tviterasi})
+
 def tviteras(request, pk):
     tviteras = Tviteras.objects.get(pk=pk)
     if request.method == "POST":
@@ -34,10 +39,6 @@ def tviteras(request, pk):
 
         logirani_tviteras.save()
     return render(request, "main/tviteras.html", {"tviteras": tviteras})
-
-def tviteras_list(request):
-    tviterasi = Tviteras.objects.exclude(user=request.user)
-    return render(request, 'main/tviteras_list.html', {'tviterasi': tviterasi})
 
 def tvit(request, pk):
     tvit = Tvit.objects.get(pk=pk)

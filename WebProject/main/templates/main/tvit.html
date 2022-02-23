@@ -2,10 +2,12 @@
 {% block content %}
 
 <div class="column">
+    <!-- BLOK ZA ISPIS TVITA -->
     <div class="block mt-3 mx-3">
         <div class="box my-2 p-3">
             <article class="media">
                 <div class="media-content">
+                    <!-- SADRŽAJ TVITA -->
                     <div class="content">
                         <p>
                             <span class="is-size-5 has-text-bold"> {{ tvit.stvorio.tviteras.ime }} </span>
@@ -17,6 +19,7 @@
                         </p>
                     </div>
                     
+                    <!-- GUMBI ZA LAJKANJE I KOMENTARE -->
                     <nav class="level is-mobile mt-5">
                         <div class="level-left">
                             <form method="post">
@@ -46,6 +49,7 @@
         </div>
     </div>
 
+    <!-- BLOK ZA ISPIS KOMENTARA -->
     <div class="block mt-3 mx-6">
         {% for komentar in tvit.komentari.all %}
             <div class="box my-2 py-1 px-3">
