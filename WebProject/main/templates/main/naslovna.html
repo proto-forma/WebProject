@@ -32,6 +32,7 @@
                     <div class="box my-2 p-3">
                         <article class="media">
                             <div class="media-content">
+                                <!-- SADRŽAJ TVITA -->
                                 <div class="content">
                                     <p>
                                         <span class="title is-size-5 has-text-bold"> {{ tvit.stvorio.tviteras.ime }} </span>
@@ -43,19 +44,19 @@
                                     </p>
                                 </div>
                                 
+                                <!-- BROJEVI LAJKOVA I KOMENTARA -->
                                 <nav class="level is-mobile mt-3">
                                     <div class="level-left">
-                                        
-                                            <div class="buttons">
-                                                <button class="button is-small is-white" disabled>
-                                                    <span class="icon"> <i class="fa-solid fa-heart"></i> </span>
-                                                    <span class="is-size-6"> {{ tvit.lajkovi.count }} </span>
-                                                </button>
-                                                <button class="button is-small is-white" disabled>
-                                                    <span class="icon"> <i class="fa-solid fa-comments"></i> </span>
-                                                    <span class="is-size-6"> {{ tvit.komentari.count }} </span>
-                                                </button>
-                                            </div>
+                                        <div class="buttons">
+                                            <button class="button is-small is-white" disabled>
+                                                <span class="icon"> <i class="fa-solid fa-heart"></i> </span>
+                                                <span class="is-size-6"> {{ tvit.lajkovi.count }} </span>
+                                            </button>
+                                            <button class="button is-small is-white" disabled>
+                                                <span class="icon"> <i class="fa-solid fa-comments"></i> </span>
+                                                <span class="is-size-6"> {{ tvit.komentari.count }} </span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </nav>  
                             </div>
@@ -69,7 +70,7 @@
 
 <!-- ISPIS SVIH TVITERAŠA -->
 <div class="column is-one-quarter">
-    <!-- BLOK ZA BOTUNE -->
+    <!-- BLOK ZA GUMBE -->
     <div class="block mt-6">
         <div class="content">
             <div class="buttons is-justify-content-center is-flex-direction-column">
@@ -89,7 +90,7 @@
         </div>
     </div>
 
-    <!-- BLOK ZA POPIS TVITERASA KOJE KORISNIK PRATI -->
+    <!-- BLOK ZA POPIS TVITERAŠA KOJE KORISNIK PRATI -->
     <div class="block mt-6">
         <h3 class="title is-4 mb-4">
             Tviteraši:

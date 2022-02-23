@@ -48,7 +48,7 @@
                 </div>
             </div>
 
-            <!-- OPIS TVITERASA -->
+            <!-- OPIS TVITERAŠA -->
             <div class="columns">
                 <div class="column">
                     <span class="subtitle is-5">
@@ -69,53 +69,54 @@
                     </span>
                 </div>
             </div>
-
         </div>
     </div>
 
     <!-- BLOK ZA LISTU TVITOVA -->
     <div class="block mt-3 mx-3">
         {% for tvit in tviteras.korisnik.tvitovi.all %}
-            <div class="box my-2 p-3">
-                <article class="media">
-                    <div class="media-content">
-                        <div class="content">
-                            <p>
-                                <span class="title is-size-5 has-text-bold"> {{ tvit.stvorio.tviteras.ime }} </span>
-                                <span class="subtitle is-size-6 has-text-grey-light"> @{{ tvit.stvorio.tviteras.hendl }} </span>
-                                <span class="subtitle is-size-6 has-text-grey-light ml-5"> {{ tvit.vrijeme_stvaranja|timesince }} </span>
-                            </p>
-                            <p>
-                                {{ tvit.tijelo }}
-                            </p>
-                        </div>
-                        
-                        <nav class="level is-mobile mt-3">
-                            <div class="level-left">
-                                <a href="{% url 'main:tvit' tvit.id %}">
-                                    <div class="buttons">
-                                        <button class="button is-small is-white" disabled>
-                                            <span class="icon"> <i class="fa-solid fa-heart"></i> </span>
-                                            <span class="is-size-6"> {{ tvit.lajkovi.count }} </span>
-                                        </button>
-                                        <button class="button is-small is-white" disabled>
-                                            <span class="icon"> <i class="fa-solid fa-comments"></i> </span>
-                                            <span class="is-size-6"> {{ tvit.komentari.count }} </span>
-                                        </button>
-                                    </div>
-                                </a>
+            <a href="{% url 'main:tvit' tvit.id %}">
+                <div class="box my-2 p-3">
+                    <article class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <p>
+                                    <span class="title is-size-5 has-text-bold"> {{ tvit.stvorio.tviteras.ime }} </span>
+                                    <span class="subtitle is-size-6 has-text-grey-light"> @{{ tvit.stvorio.tviteras.hendl }} </span>
+                                    <span class="subtitle is-size-6 has-text-grey-light ml-5"> {{ tvit.vrijeme_stvaranja|timesince }} </span>
+                                </p>
+                                <p>
+                                    {{ tvit.tijelo }}
+                                </p>
                             </div>
-                        </nav>  
-                    </div>
-                </article>
-            </div>
+                            
+                            <!-- ISPIS BROJA LAJKOVA I KOMENTARA -->
+                            <nav class="level is-mobile mt-3">
+                                <div class="level-left">
+                                        <div class="buttons">
+                                            <button class="button is-small is-white" disabled>
+                                                <span class="icon"> <i class="fa-solid fa-heart"></i> </span>
+                                                <span class="is-size-6"> {{ tvit.lajkovi.count }} </span>
+                                            </button>
+                                            <button class="button is-small is-white" disabled>
+                                                <span class="icon"> <i class="fa-solid fa-comments"></i> </span>
+                                                <span class="is-size-6"> {{ tvit.komentari.count }} </span>
+                                            </button>
+                                        </div>
+                                </div>
+                            </nav>  
+                        </div>
+                    </article>
+                </div>
+            </a>
         {% endfor %}
     </div>
 </div>
 
 <!-- STUPAC ZA POPIS PRATITELJA-->
 <div class="column is-one-quarter">
-    <!-- BLOK ZA POPIS TVITERASA KOJE KORISNIK PRATI -->
+    
+    <!-- BLOK ZA GUMBE MOJ PROFIL; UREDI PROFIL; LOGOUT;  -->
     <div class="block mt-6">
         <div class="content">
             <div class="buttons is-justify-content-center is-flex-direction-column">
@@ -143,6 +144,8 @@
             </div>
         </div>
     </div>
+
+    <!-- BLOK ZA POPIS TVITERASA KOJE KORISNIK PRATI -->
     <div class="block mt-6">
         <h3 class="title is-4 mb-4">
             {{ tviteras.prati.count }} pratim:

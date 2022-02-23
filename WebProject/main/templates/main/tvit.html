@@ -49,8 +49,7 @@
         </div>
     </div>
 
-    <!-- BLOK ZA ISPIS KOMENTARA -->
-
+    <!-- BLOK ZA UNOS NOVOG KOMENTARA -->
     <div class="block mt-3 mx-6">
         <div class="box my-2 py-1 px-3">
             <article class="media">
@@ -72,13 +71,14 @@
         </div>
     </div>
 
+    <!-- BLOKA ZA ISPIS KOMENTARA TVITA -->
     <div class="block mt-3 mx-6">
         {% for komentar in tvit.komentari.all %}
             <div class="box my-2 py-1 px-3">
                 <article class="media">
                     <div class="media-content">
-                        <!-- STupac za -->
                         <div class="content">
+                            <!-- ISPIS SADRŽAJA KOMENTARA -->
                             <div class="column">
                                 <div class="columns">
                                     <div class="column">

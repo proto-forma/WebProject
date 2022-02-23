@@ -22,7 +22,7 @@ class KomentarForm(forms.ModelForm):
     tijelo = forms.CharField(
         widget=forms.widgets.Textarea(
             attrs={
-                "placeholder": "Ništa sporo, brate, samo gas daj...",
+                "placeholder": "Članak lomi čeljust, kolino ti slomi rame...",
                 "class": "input is-grey-light is-medium",
             }
         ),

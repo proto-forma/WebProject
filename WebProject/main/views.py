@@ -55,7 +55,6 @@ def tvit(request, pk):
     form = KomentarForm(request.POST or None)
 
     if request.method == "POST":
-        
         if form.is_valid():
             komentar = form.save(commit=False)
             komentar.tvit = tvit
