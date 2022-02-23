@@ -9,5 +9,5 @@ urlpatterns = [
     path('tviteras/<int:pk>', tviteras, name='tviteras'),
     path('tvit/<int:pk>', tvit, name='tvit'),
     path('register/', register, name='register'),
-    path('novi_tviteras/', novi_tviteras, name='novi_tviteras'),
+    path('uredi_tviterasa/', uredi_tviterasa, name='uredi_tviterasa'),
 ]

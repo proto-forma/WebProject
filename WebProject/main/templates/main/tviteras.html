@@ -120,6 +120,13 @@
         <div class="content">
             <div class="buttons is-justify-content-center is-flex-direction-column">
                 {% if tviteras == user.tviteras %}
+                    <a href="{% url 'main:uredi_tviterasa' %}">
+                        <button class="button is-info is-medium">
+                            <span class="icon"> <i class="fa-solid fa-address-card"></i> </span>
+                            <span> Uredi profil </span>
+                        </button>
+                    </a>
+                {% else %}
                     <a href="{% url 'main:tviteras' user.tviteras.id %}">
                         <button class="button is-info is-medium">
                             <span class="icon"> <i class="fa-solid fa-address-card"></i> </span>

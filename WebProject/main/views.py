@@ -89,7 +89,7 @@ def register(request):
 
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('main:novi_tviteras')
+            return redirect('main:uredi_tviterasa')
     else:
         form = UserCreationForm()
 
@@ -98,15 +98,15 @@ def register(request):
     return render(request, "registration/register.html", context)
 
 @login_required
-def novi_tviteras(request):
+def uredi_tviterasa(request):
     tviteras = request.user.tviteras
     form = TviterasForm(request.POST or None, instance=tviteras)
 
     if request.method == "POST":
         if form.is_valid():
-            novi_tviteras = form.save(commit=False)
-            novi_tviteras.save()
+            novi_podaci = form.save(commit=False)
+            novi_podaci.save()
 
             return redirect('main:naslovna_stranica')
 
-    return render(request, "main/novi_tviteras.html", {"form": form})
+    return render(request, "main/uredi_tviterasa.html", {"form": form})
