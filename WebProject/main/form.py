@@ -16,3 +16,18 @@ class TvitForm(forms.ModelForm):
     class Meta:
         model = Tvit
         exclude = ("stvorio", )
+
+class KomentarForm(forms.ModelForm):
+    tijelo = forms.CharField(
+        widget=forms.widgets.Textarea(
+            attrs={
+                "placeholder": "Tvit tvit tvi...",
+                "class": "input is-grey-light is-medium",
+            }
+        ),
+        label="",
+    )
+
+    class Meta:
+        model = Komentar
+        exclude = ("stvorio", "tvit", )

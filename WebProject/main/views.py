@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from .models import *
@@ -9,7 +9,7 @@ from .form import *
 def glavna_stranica(request):
     return render(request, 'base.html')
 
-def naslovna (request):
+def naslovna(request):
     form = TvitForm()
     tviterasi = Tviteras.objects.exclude(korisnik=request.user)
     #if request.method == "POST":
@@ -43,7 +43,17 @@ def tviteras(request, pk):
 
 def tvit(request, pk):
     tvit = Tvit.objects.get(pk=pk)
+    trenutni_path = request.path
+
     if request.method == "POST":
+        form = KomentarForm(request.POST)
+        if form.is_valid():
+            komentar = form.save(commit=False)
+            komentar.tvit = tvit
+            komentar.stvorio = request.user
+            komentar.save()
+            return redirect(trenutni_path)
+
         logirani_korisnik = request.user
         podaci = request.POST
         radnja_lajkanje = podaci.get("lajkanje")
@@ -54,7 +64,10 @@ def tvit(request, pk):
             tvit.tvit_lajkovi.remove(logirani_korisnik)
 
         tvit.save()
-    return render(request, "main/tvit.html", {"tvit": tvit})
+        return redirect(trenutni_path)
+
+    form = KomentarForm()
+    return render(request, "main/tvit.html", {"tvit": tvit, "form": form})
 
 
 def register(request):
@@ -68,7 +81,7 @@ def register(request):
 
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('index')
+            return redirect('main:naslovna_stranica')
 
     else:
         form = UserCreationForm()
