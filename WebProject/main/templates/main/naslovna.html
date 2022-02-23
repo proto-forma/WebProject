@@ -3,13 +3,13 @@
 
 <div class="column">
     <!-- UNOS NOVOG TVITA -->
-    <form method="post">
+    {% comment %} <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button class="button is-success is-fullwidth is-medium mt-5"
                 type="submit">Tvit
         </button>
-    </form>
+    </form> {% endcomment %}
 
     <!-- ISPIS SVIH TVITOVA -->
     <div class="block mx-3">
@@ -58,20 +58,21 @@
 
 <!-- ISPIS SVIH TVITERAŠA -->
 <div class="column is-one-quarter">
-    <div class="block">
-        <h3 class="title is-4">
-            {{tviteras.hendl}} prati:
+    <!-- BLOK ZA POPIS TVITERASA KOJE KORISNIK PRATI -->
+    <div class="block mt-6">
+        <h3 class="title is-4 mb-4">
+            Tviteraši:
         </h3>
         <div class="content">
-            {% for prati in tviteras.prati.all %}
-                <div class="block">
-                    <div class="box p-2">
-                        <a href="{% url 'main:tviteras' prati.id %}">
+            {% for tviteras in tviterasi %}
+                <div class="block my-2">
+                    <div class="box p-3">
+                        <a href="{% url 'main:tviteras' tviteras.id %}">
                             <div class="media">
                                 <div class="media-content">
                                     <p>
-                                        <span class="title is-5"> {{ prati.ime }} </span> <br>
-                                        <span class="subtitle is-6"> @{{ prati.hendl }} </span>
+                                        <span class="title is-5"> {{ tviteras.ime }} </span> <br>
+                                        <span class="subtitle is-6"> @{{ tviteras.hendl }} </span>
                                     </p>
                                 </div>
                             </div>

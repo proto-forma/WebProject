@@ -10,6 +10,7 @@ def glavna_stranica(request):
     return render(request, 'base.html')
 
 def naslovna (request):
+    tviterasi = Tviteras.objects.exclude(korisnik=request.user)
     #if request.method == "POST":
         #form = TvitForm(request.POST or None)
         #if form.is_valid():
@@ -17,7 +18,7 @@ def naslovna (request):
             #Tvit.user = request.user
             #Tvit.save()
             #return redirect("tviter:naslovna_stranica")
-    return render(request, 'main/naslovna.html')
+    return render(request, 'main/naslovna.html', {'tviterasi': tviterasi})
 
 def tviteras(request, pk):
     tviteras = Tviteras.objects.get(pk=pk)
@@ -33,6 +34,10 @@ def tviteras(request, pk):
 
         logirani_tviteras.save()
     return render(request, "main/tviteras.html", {"tviteras": tviteras})
+
+def tviteras_list(request):
+    tviterasi = Tviteras.objects.exclude(user=request.user)
+    return render(request, 'main/tviteras_list.html', {'tviterasi': tviterasi})
 
 def tvit(request, pk):
     tvit = Tvit.objects.get(pk=pk)
