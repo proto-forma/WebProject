@@ -58,6 +58,18 @@
 <div class="column is-one-quarter">
     <!-- BLOK ZA POPIS TVITERASA KOJE KORISNIK PRATI -->
     <div class="block mt-6">
+        <div class="content">
+            <a href="{% url 'main:tviteras' user.tviteras.id %}">
+                        <div class="buttons is-justify-content-center">
+                            <div class="button is-info is-medium">
+                                <span class="icon"> <i class="fa-solid fa-address-card"></i> </span>
+                                <span> Moj profil </span>
+                            </div>
+                        </p>
+            </a>
+        </div>
+    </div>
+    <div class="block mt-6">
         <h3 class="title is-4 mb-4">
             Tviteraši:
         </h3>
