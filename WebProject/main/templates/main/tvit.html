@@ -2,14 +2,62 @@
 {% block content %}
 
 <div class="column">
-    {% for komentar in tvit.komentari.all %}
-        <div class="box">
-            {{ komentar.tijelo }}
-            <span class="is-small has-text-grey-light">
-                ({{ komentar.vrijeme_komentiranja }} by {{ komentar.stvorio.tviteras.hendl }})
-            </span>
+    <div class="block mt-3 mx-3">
+        <div class="box my-2 p-3">
+            <article class="media">
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                            <span class="is-size-5 has-text-bold"> {{ tvit.stvorio.tviteras.ime }} </span>
+                            <span class="is-size-6 has-text-grey-light"> @{{ tvit.stvorio.tviteras.hendl }} </span>
+                            <span class="is-size-6 has-text-grey-light ml-5"> {{ tvit.vrijeme_stvaranja|timesince }} </span>
+                        </p>
+                        <p>
+                            {{ tvit.tijelo }}
+                        </p>
+                    </div>
+                    
+                    <nav class="level is-mobile mt-5">
+                        <div class="level-left">
+                            <a href="{% url 'main:tvit' tvit.id %}">
+                                <div class="buttons">
+                                    <button class="button is-disabled is-small is-light">
+                                        <span class="icon"> <i class="fa-solid fa-heart"></i> </span>
+                                        <span> {{ tvit.lajkovi.count }} </span>
+                                    </button>
+                                    <button class="button is-disabled is-small is-light">
+                                        <span class="icon"> <i class="fa-solid fa-comments"></i> </span>
+                                        <span> {{ tvit.komentari.count }} </span>
+                                    </button>
+                                </div>
+                            </a>
+                        </div>
+                    </nav>  
+                </div>
+            </article>
         </div>
-    {% endfor %}
+    </div>
+
+    <div class="block mt-3 mx-6">
+        {% for komentar in tvit.komentari.all %}
+            <div class="box my-2 py-1 px-3">
+                <article class="media">
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <span class="is-size-5 has-text-bold"> {{ komentar.stvorio.tviteras.ime }} </span>
+                                <span class="is-size-6 has-text-grey-light"> @{{ komentar.stvorio.tviteras.hendl }} </span>
+                                <span class="is-size-6 has-text-grey-light ml-5"> {{ komentar.vrijeme_komentiranja|timesince }} </span>
+                            </p>
+                            <p>
+                                {{ komentar.tijelo }}
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock content %}
