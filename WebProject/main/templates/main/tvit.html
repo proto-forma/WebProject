@@ -19,18 +19,26 @@
                     
                     <nav class="level is-mobile mt-5">
                         <div class="level-left">
-                            <a href="{% url 'main:tvit' tvit.id %}">
+                            <form method="post">
+                                {% csrf_token %}
                                 <div class="buttons">
-                                    <button class="button is-disabled is-small is-light">
-                                        <span class="icon"> <i class="fa-solid fa-heart"></i> </span>
-                                        <span> {{ tvit.lajkovi.count }} </span>
-                                    </button>
+                                    {% if user in tvit.tvit_lajkovi.all  %}
+                                        <button class="button is-small is-info" name="lajkanje" value="dislajk">
+                                            <span class="icon"> <i class="fa-solid fa-heart-crack"></i> </span>
+                                            <span class="is-size-6"> {{ tvit.lajkovi.count }} </span>
+                                        </button>
+                                    {% else %}
+                                        <button class="button is-small is-light" name="lajkanje" value="lajk">
+                                            <span class="icon"> <i class="fa-solid fa-heart"></i> </span>
+                                            <span class="is-size-6"> {{ tvit.lajkovi.count }} </span>
+                                        </button>
+                                    {% endif %}
                                     <button class="button is-disabled is-small is-light">
                                         <span class="icon"> <i class="fa-solid fa-comments"></i> </span>
-                                        <span> {{ tvit.komentari.count }} </span>
+                                        <span class="is-size-6"> {{ tvit.komentari.count }} </span>
                                     </button>
                                 </div>
-                            </a>
+                            </form>  
                         </div>
                     </nav>  
                 </div>

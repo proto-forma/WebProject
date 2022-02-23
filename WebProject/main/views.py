@@ -41,6 +41,17 @@ def tviteras_list(request):
 
 def tvit(request, pk):
     tvit = Tvit.objects.get(pk=pk)
+    if request.method == "POST":
+        logirani_korisnik = request.user
+        podaci = request.POST
+        radnja_lajkanje = podaci.get("lajkanje")
+
+        if radnja_lajkanje == "lajk":
+            tvit.tvit_lajkovi.add(logirani_korisnik)
+        elif radnja_lajkanje == "dislajk":
+            tvit.tvit_lajkovi.remove(logirani_korisnik)
+
+        tvit.save()
     return render(request, "main/tvit.html", {"tvit": tvit})
 
 

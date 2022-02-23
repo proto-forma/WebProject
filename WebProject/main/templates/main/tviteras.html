@@ -94,13 +94,13 @@
                             <div class="level-left">
                                 <a href="{% url 'main:tvit' tvit.id %}">
                                     <div class="buttons">
-                                        <button class="button is-disabled is-small is-light">
+                                        <button class="button is-disabled is-small is-white">
                                             <span class="icon"> <i class="fa-solid fa-heart"></i> </span>
-                                            <span> {{ tvit.lajkovi.count }} </span>
+                                            <span class="is-size-6"> {{ tvit.lajkovi.count }} </span>
                                         </button>
-                                        <button class="button is-disabled is-small is-light">
+                                        <button class="button is-disabled is-small is-white">
                                             <span class="icon"> <i class="fa-solid fa-comments"></i> </span>
-                                            <span> {{ tvit.komentari.count }} </span>
+                                            <span class="is-size-6"> {{ tvit.komentari.count }} </span>
                                         </button>
                                     </div>
                                 </a>
