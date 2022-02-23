@@ -6,7 +6,7 @@ class TvitForm(forms.ModelForm):
         required=True,
         widget=forms.widgets.Textarea(
             attrs={
-                "placeholder": "Dweet something...",
+                "placeholder": "Tvit tvit tvit...",
                 "class": "textarea is-success is-medium",
             }
         ),
@@ -15,4 +15,4 @@ class TvitForm(forms.ModelForm):
 
     class Meta:
         model = Tvit
-        exclude = ("user", )
+        exclude = ("stvorio", )

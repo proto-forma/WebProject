@@ -15,42 +15,40 @@
     <div class="block mx-3">
         {% for praceni_tviteras in user.tviteras.prati.all %}
             {% for tvit in praceni_tviteras.korisnik.tvitovi.all %}
-                <div class="box my-2 p-3">
-                    <article class="media">
-                        <div class="media-content">
-                            <div class="content">
-                                <p>
-                                    <span class="is-size-5 has-text-bold">
-                                        {{ tvit.stvorio.tviteras.ime }}
-                                    </span>
-                                    <span class=" is-size-6 has-text-grey-light">
-                                        @{{ tvit.stvorio.tviteras.hendl }} {{ tvit.vrijeme_stvaranja|timesince }}
-                                    </span>
-                                </p>
-                                <p>
-                                    {{ tvit.tijelo }}
-                                </p>
-                            </div>
-                            
-                            <nav class="level is-mobile">
-                                <div class="level-left">
-                                    <a href="{% url 'main:tvit' tvit.id %}">
-                                        <div class="buttons">
-                                            <button class="button is-disabled is-small is-white">
-                                                <span class="icon"> <i class="fa-solid fa-heart"></i> </span>
-                                                <span class="is-size-6"> {{ tvit.lajkovi.count }} </span>
-                                            </button>
-                                            <button class="button is-disabled is-small is-white">
-                                                <span class="icon"> <i class="fa-solid fa-comments"></i> </span>
-                                                <span class="is-size-6"> {{ tvit.komentari.count }} </span>
-                                            </button>
-                                        </div>
-                                    </a>
+                <a href="{% url 'main:tvit' tvit.id %}">
+                    <div class="box my-2 p-3">
+                        <article class="media">
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <span class="title is-size-5 has-text-bold"> {{ tvit.stvorio.tviteras.ime }} </span>
+                                        <span class="subtitle is-size-6 has-text-grey-light"> @{{ tvit.stvorio.tviteras.hendl }} </span>
+                                        <span class="subtitle is-size-6 has-text-grey-light ml-5"> {{ tvit.vrijeme_stvaranja|timesince }}</span>
+                                    </p>
+                                    <p>
+                                        {{ tvit.tijelo }}
+                                    </p>
                                 </div>
-                            </nav>  
-                        </div>
-                    </article>
-                </div>
+                                
+                                <nav class="level is-mobile mt-3">
+                                    <div class="level-left">
+                                        
+                                            <div class="buttons">
+                                                <button class="button is-small is-white" disabled>
+                                                    <span class="icon"> <i class="fa-solid fa-heart"></i> </span>
+                                                    <span class="is-size-6"> {{ tvit.lajkovi.count }} </span>
+                                                </button>
+                                                <button class="button is-small is-white" disabled>
+                                                    <span class="icon"> <i class="fa-solid fa-comments"></i> </span>
+                                                    <span class="is-size-6"> {{ tvit.komentari.count }} </span>
+                                                </button>
+                                            </div>
+                                    </div>
+                                </nav>  
+                            </div>
+                        </article>
+                    </div>
+                </a>
             {% endfor %}
         {% endfor %}
     </div>

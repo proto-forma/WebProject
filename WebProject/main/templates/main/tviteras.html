@@ -81,24 +81,24 @@
                     <div class="media-content">
                         <div class="content">
                             <p>
-                                <span class="is-size-5 has-text-bold"> {{ tvit.stvorio.tviteras.ime }} </span>
-                                <span class="is-size-6 has-text-grey-light"> @{{ tvit.stvorio.tviteras.hendl }} </span>
-                                <span class="is-size-6 has-text-grey-light ml-5"> {{ tvit.vrijeme_stvaranja|timesince }} </span>
+                                <span class="title is-size-5 has-text-bold"> {{ tvit.stvorio.tviteras.ime }} </span>
+                                <span class="subtitle is-size-6 has-text-grey-light"> @{{ tvit.stvorio.tviteras.hendl }} </span>
+                                <span class="subtitle is-size-6 has-text-grey-light ml-5"> {{ tvit.vrijeme_stvaranja|timesince }} </span>
                             </p>
                             <p>
                                 {{ tvit.tijelo }}
                             </p>
                         </div>
                         
-                        <nav class="level is-mobile mt-5">
+                        <nav class="level is-mobile mt-3">
                             <div class="level-left">
                                 <a href="{% url 'main:tvit' tvit.id %}">
                                     <div class="buttons">
-                                        <button class="button is-disabled is-small is-white">
+                                        <button class="button is-small is-white" disabled>
                                             <span class="icon"> <i class="fa-solid fa-heart"></i> </span>
                                             <span class="is-size-6"> {{ tvit.lajkovi.count }} </span>
                                         </button>
-                                        <button class="button is-disabled is-small is-white">
+                                        <button class="button is-small is-white" disabled>
                                             <span class="icon"> <i class="fa-solid fa-comments"></i> </span>
                                             <span class="is-size-6"> {{ tvit.komentari.count }} </span>
                                         </button>
