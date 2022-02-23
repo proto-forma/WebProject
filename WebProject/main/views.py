@@ -44,9 +44,10 @@ def tviteras(request, pk):
 def tvit(request, pk):
     tvit = Tvit.objects.get(pk=pk)
     trenutni_path = request.path
-
+    form = KomentarForm(request.POST or None)
+    
     if request.method == "POST":
-        form = KomentarForm(request.POST)
+        
         if form.is_valid():
             komentar = form.save(commit=False)
             komentar.tvit = tvit
@@ -66,7 +67,6 @@ def tvit(request, pk):
         tvit.save()
         return redirect(trenutni_path)
 
-    form = KomentarForm()
     return render(request, "main/tvit.html", {"tvit": tvit, "form": form})
 
 
